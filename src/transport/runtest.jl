@@ -6,8 +6,8 @@ include(joinpath(@__DIR__, "loadMod.jl"))
 # =============================
 
 ϵ_list = [0.05, 0.1, 0.15]
-θ_list = [0.2, 0.15, 0.10, 0.05]
-ε_list = [0.3, 0.5, 0.7, 0.9]
+θ_list = [0.1, 0.075, 0.05]
+ε_list = [0.3, 0.5, 0.7]
 
 results = DataFrame(
     model_name      = String[],
@@ -22,6 +22,10 @@ results = DataFrame(
 # =============================
 # Experiment loops
 # =============================
+ϵ_list = [0.1]
+θ_list = [0.05, 0.07, 0.09, 0.11, 0.13, 0.15, 0.17, 0.19, 0.21, 0.23, 0.25, 0.27, 0.3, 0.35, 0.4, 0.45, 0.5]
+ε_list = [0.5]
+
 for ϵ in ϵ_list
     for θ in θ_list
         # nominal (no ε parameter)

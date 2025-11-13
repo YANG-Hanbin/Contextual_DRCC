@@ -12,17 +12,17 @@ using DataFrames, Printf, PrettyTables;
 using JLD2, FilePathsBase;
 const GRB_ENV = Gurobi.Env();
 
-include(joinpath("struct.jl"))
-include(joinpath("utils.jl"))
-include(joinpath("contextual_data_gen.jl"))
-include(joinpath("modeling_DRCC.jl"))
-
+# cd("/Users/aaron/Contextual_DRCC/src/transport");
+include(joinpath(@__DIR__, "struct.jl"))
+include(joinpath(@__DIR__, "utils.jl"))
+include(joinpath(@__DIR__, "contextual_data_gen.jl"))
+include(joinpath(@__DIR__, "modeling_DRCC.jl"))
 
 # =============================
 #  Load Data
 # =============================
-file_path = joinpath("data", "F5_D10_N50.jld2");
-data = JLD2.load(file_path);
+file_path = joinpath(@__DIR__, "..", "..", "data", "F5_D10_N50_seed20251114.jld2")
+data = JLD2.load(file_path)
 inst = data["inst"];
 X = data["X"];
 
@@ -42,9 +42,8 @@ test_data = generate_test_instance(
     inst.D, 
     x0; 
     test_data_size = 1000, 
-    seed=rand(1:100), 
+    seed=20251114, 
     K=3, 
     ρ=0.2, 
     beta_master=data["beta"]
 );
-# test_data = JLD2.load(joinpath("data", "F5_D10_N150.jld2"))["inst"].Ξ;

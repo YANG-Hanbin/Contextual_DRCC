@@ -97,7 +97,7 @@ end
 function save_instance_jld2(inst::TranspoInstance; root::AbstractString = pwd(),
                             X::AbstractMatrix=nothing, beta::AbstractMatrix=nothing)
     isdir(root) || mkpath(root)
-    outpath = joinpath(root, "F$(inst.F)_D$(inst.D)_N$(inst.N).jld2")
+    outpath = joinpath(root, "F$(inst.F)_D$(inst.D)_N$(inst.N)_seed$(inst.seed).jld2")
 
     JLD2.jldopen(outpath, "w") do file
         file["inst"] = inst                 # keep full struct with type info
@@ -121,7 +121,7 @@ function generate_all(;
     Ds=10:10:50, 
     Ns=(50,100,150), 
     F=5, 
-    base_seed=rand(1000:2000),
+    base_seed=20251113,
     K::Int=3,
     ρ::Float64=0.2,
     β_scale::Float64=0.05
@@ -131,7 +131,7 @@ function generate_all(;
     isdir(data_dir) || mkpath(data_dir)
 
     Dmax = maximum(Ds)
-    seed_beta = rand(2000:3000) 
+    seed_beta = 1234
     beta_master = make_beta_master(Dmax, K; seed_beta=seed_beta, β_scale=β_scale)
 
     idx = 0
