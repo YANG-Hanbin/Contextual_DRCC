@@ -17,7 +17,7 @@ include(joinpath(@__DIR__, "struct.jl"))
 include(joinpath(@__DIR__, "utils.jl"))
 include(joinpath(@__DIR__, "contextual_data_gen.jl"))
 
-data = JLD2.load(joinpath(@__DIR__, "..", "..", "data", "F5_D10_N50_seed20251114.jld2"));
+data = JLD2.load(joinpath(@__DIR__, "..", "..", "data", "F5_D10_N100.jld2"));
 inst = data["inst"];
 # --------------------
 # Nominal DRCCP
@@ -29,7 +29,7 @@ historical_data = generate_test_instance(
     inst.D, 
     x0; 
     test_data_size = inst.N, 
-    seed=20251114, 
+    seed=inst.seed, 
     K=3, 
     ρ=0.2, 
     beta_master=data["beta"]
@@ -39,7 +39,7 @@ test_data = generate_test_instance(
     inst.D, 
     x0; 
     test_data_size = 1000, 
-    seed=20251114, 
+    seed=inst.seed, 
     K=3, 
     ρ=0.2, 
     beta_master=data["beta"]
@@ -134,7 +134,7 @@ results = DataFrame(
 M = 1e3
 
 ϵ_list = [0.05, 0.1, 0.15]
-θ_list = [0.2, 0.15, 0.10, 0.05]
+θ_list = [0.10, 0.08, 0.06, 0.04, 0.02, 0.01]
 
 for ϵ in ϵ_list
     for θ in θ_list

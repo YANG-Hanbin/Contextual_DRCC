@@ -97,7 +97,7 @@ end
 function save_instance_jld2(inst::TranspoInstance; root::AbstractString = pwd(),
                             X::AbstractMatrix=nothing, beta::AbstractMatrix=nothing)
     isdir(root) || mkpath(root)
-    outpath = joinpath(root, "F$(inst.F)_D$(inst.D)_N$(inst.N)_seed$(inst.seed).jld2")
+    outpath = joinpath(root, "F$(inst.F)_D$(inst.D)_N$(inst.N).jld2")
 
     JLD2.jldopen(outpath, "w") do file
         file["inst"] = inst                 # keep full struct with type info
@@ -118,7 +118,7 @@ end
 # Main batch generator
 # --------------------
 function generate_all(; 
-    Ds=10:10:50, 
+    Ds=5:5:50, 
     Ns=(50,100,150), 
     F=5, 
     base_seed=20251113,
@@ -131,7 +131,7 @@ function generate_all(;
     isdir(data_dir) || mkpath(data_dir)
 
     Dmax = maximum(Ds)
-    seed_beta = 1234
+    seed_beta = 12345
     beta_master = make_beta_master(Dmax, K; seed_beta=seed_beta, β_scale=β_scale)
 
     idx = 0
@@ -140,7 +140,7 @@ function generate_all(;
         seed = base_seed + idx
         inst, X, beta_used = generate_instance(
             F, D, N;
-            seed=seed, K=K, ρ=ρ,
+            seed=20251114, K=K, ρ=ρ, # 20251114
             beta_master=beta_master
         )
         _ = save_instance_jld2(inst; root=data_dir, X=X, beta=beta_used)
@@ -150,5 +150,5 @@ end
 
 # Example usage (uncomment to run):
 # if abspath(PROGRAM_FILE) == @__FILE__
-    # generate_all()
+    generate_all()
 # end
