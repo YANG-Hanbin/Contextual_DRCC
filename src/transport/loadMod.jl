@@ -47,3 +47,4 @@ test_data = generate_test_instance(
     ρ=0.2, 
     beta_master=data["beta"]
 );
+# test_data = JLD2.load(joinpath("data", "F5_D10_N150.jld2"))["inst"].Ξ;

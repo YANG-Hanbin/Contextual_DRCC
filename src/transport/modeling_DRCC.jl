@@ -115,7 +115,7 @@ function run_and_record!(
     return (
         model_name      = model_name,
         ϵ               = ϵ,
-        theta           = θ,
+        θ               = θ,
         ε               = ε,
         objective       = obj,
         satisfaction    = satisfaction,

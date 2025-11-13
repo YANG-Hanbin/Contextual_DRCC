@@ -12,7 +12,7 @@ include(joinpath(@__DIR__, "loadMod.jl"))
 results = DataFrame(
     model_name      = String[],
     ϵ               = Float64[],
-    theta           = Float64[],
+    θ               = Float64[],
     ε               = Union{Float64,Nothing}[],
     objective       = Union{Float64,Missing}[],
     satisfaction    = Union{Float64,Missing}[],
